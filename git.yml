@@ -1,0 +1,119 @@
+image: node:14.19.2
+
+stages:
+  - build
+
+frontEndStageCN:
+  stage: build
+  only:
+    refs:
+      - develop
+    changes:
+      - packages/front-end/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/front-end && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:fe
+  artifacts:
+    name: "build-stage-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/front-end/build
+    expire_in: 1 week
+
+frontEndProdCN:
+  stage: build
+  only:
+    refs:
+      - tags
+    changes:
+      - packages/front-end/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/front-end && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:prod:fe
+  artifacts:
+    name: "build-prod-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/front-end/build
+    expire_in: 1 week
+
+publicShareStageCN:
+  stage: build
+  only:
+    refs:
+      - develop
+    changes:
+      - packages/public-share/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/public-share && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:stage:share
+  artifacts:
+    name: "share-stage-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/public-share/build
+    expire_in: 1 week
+
+publicShareProdCN:
+  stage: build
+  only:
+    refs:
+      - tags
+    changes:
+      - packages/public-share/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/public-share && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:prod:share
+  artifacts:
+    name: "share-prod-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/public-share/build
+    expire_in: 1 week
+
+AdminEndStageCN:
+  stage: build
+  only:
+    refs:
+      - develop
+    changes:
+      - packages/admin-end/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/admin-end && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:ae
+  artifacts:
+    name: "build-admin-stage-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/admin-end/build
+    expire_in: 1 week
+
+AdminEndProdCN:
+  stage: build
+  only:
+    refs:
+      - tags
+      - master
+    changes:
+      - packages/admin-end/**/*
+      - packages/common/**/*
+      - .gitlab-ci.yml
+  script:
+    - cd $CI_PROJECT_DIR/packages/admin-end && yarn install
+    - cd $CI_PROJECT_DIR/packages/common && yarn install
+    - cd $CI_PROJECT_DIR && yarn build:prod:ae
+  artifacts:
+    name: "build-admin-prod-cn"
+    paths:
+      - $CI_PROJECT_DIR/packages/admin-end/build
+    expire_in: 1 week
