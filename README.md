@@ -1,3 +1,9 @@
-# Headline
+# Quick-start
 
-> An awesome project.
+```bash
+npm i docsify-cli -g
+```
+
+```bash
+docsify serve docs
+```

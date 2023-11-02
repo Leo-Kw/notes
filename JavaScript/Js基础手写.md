@@ -113,7 +113,7 @@ console.log(b._reduce((pre, cur) => pre + cur, 2)); // 13
 
 ## Object.create
 
-**[MDN](*https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create*)** `Object.create()` 方法用于创建一个新对象，使用现有的对象来作为新创建对象的原型（`prototype`）。
+**[MDN](*<https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create>*)** `Object.create()` 方法用于创建一个新对象，使用现有的对象来作为新创建对象的原型（`prototype`）。
 
 ```javascript
 Object.prototype._create = function (proto) {
